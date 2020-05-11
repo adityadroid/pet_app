@@ -43,70 +43,72 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Column buildHelloThere(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 200),
-          child: Text('Hello There!',
-              style: Theme.of(context)
-                  .textTheme
-                  .display1
-                  .copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text('Sign in to continue caring',
-              style: Theme.of(context).textTheme.subhead),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(32, 72, 32, 0),
-          child: TextField(
-            controller: emailController,
-            decoration: InputDecoration(
-                hintText: "E-Mail", prefixIcon: Icon(Icons.alternate_email)),
+  Widget buildHelloThere(BuildContext context) {
+    return SingleChildScrollView(
+          child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 200),
+            child: Text('Hello There!',
+                style: Theme.of(context)
+                    .textTheme
+                    .display1
+                    .copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(32, 16, 32, 0),
-          child: TextField(
-            controller: passwordController,
-            obscureText: true,
-            decoration: InputDecoration(
-                hintText: 'Password', prefixIcon: Icon(Icons.lock)),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Sign in to continue caring',
+                style: Theme.of(context).textTheme.subhead),
           ),
-        ),
-        Container(
-          width: double.maxFinite,
-          padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
-          child: RaisedButton(
-            elevation: 0,
-            color: Colors.white,
-            onPressed: () {
-              if (emailController.text.isEmpty ||
-                  passwordController.text.isEmpty) {
-                final snackBar =
-                    SnackBar(content: Text('Both fields are mandatory'));
-                Scaffold.of(context).showSnackBar(snackBar);
-                return;
-              }
-              bloc.add(
-                  SignInEvent(emailController.text, passwordController.text));
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(32),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(32, 72, 32, 0),
+            child: TextField(
+              controller: emailController,
+              decoration: InputDecoration(
+                  hintText: "E-Mail", prefixIcon: Icon(Icons.alternate_email)),
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 16, bottom: 16),
-              child: Text(
-                'Sign in',
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(32, 16, 32, 0),
+            child: TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                  hintText: 'Password', prefixIcon: Icon(Icons.lock)),
+            ),
+          ),
+          Container(
+            width: double.maxFinite,
+            padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+            child: RaisedButton(
+              elevation: 0,
+              color: Colors.white,
+              onPressed: () {
+                if (emailController.text.isEmpty ||
+                    passwordController.text.isEmpty) {
+                  final snackBar =
+                      SnackBar(content: Text('Both fields are mandatory'));
+                  Scaffold.of(context).showSnackBar(snackBar);
+                  return;
+                }
+                bloc.add(
+                    SignInEvent(emailController.text, passwordController.text));
+              },
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(32),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 16, bottom: 16),
+                child: Text(
+                  'Sign in',
+                  style:
+                      TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }
